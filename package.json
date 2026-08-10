@@ -1,0 +1,32 @@
+{
+  "name": "mailscheduler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.1104.0",
+    "amqplib": "^2.0.1",
+    "bullmq": "^6.0.7",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dependencies": "^0.0.1",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "http": "^0.0.1-security",
+    "ioredis": "^6.0.0",
+    "mogoose": "^0.0.1-security",
+    "mongodb": "^7.5.0",
+    "mongoose": "^9.8.0",
+    "nodemon": "^3.1.14",
+    "path": "^0.12.7",
+    "update": "^0.7.4"
+  }
+}
