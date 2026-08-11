@@ -6,14 +6,14 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import { createServer } from 'http';
 import dotenv from "dotenv";
-import connectMongo from './config/dbConfig.js';
-import RabbitMQ from './config/rabbitmq.js';
+import { Database } from './config/DbConfig.js';
+import { RabbitMQ } from './config/Rabbitmq.js';
 
 
 const app = express();
 const port = process.env.PORT;
 const httpServer = createServer(app);
-connectMongo();
+Database.connectMongo();
 RabbitMQ.connect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
