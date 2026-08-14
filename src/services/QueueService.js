@@ -1,5 +1,5 @@
 import { EmailService } from './EmailService.js';
-import { RabbitMQ } from '../config/rabbitmq.js';
+import { RabbitMQ } from '../config/Rabbitmq.js';
 import { SendMailService } from './SendMailService.js';
 
 
