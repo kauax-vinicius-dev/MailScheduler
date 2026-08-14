@@ -1,5 +1,6 @@
-import EmailService from './EmailService.js';
-import RabbitMQ from '../config/rabbitmq.js';
+import { EmailService } from './EmailService.js';
+import { RabbitMQ } from '../config/rabbitmq.js';
+import { SendMailService } from './SendMailService.js';
 
 
 export class QueueService {
@@ -15,13 +16,20 @@ export class QueueService {
 
             for (let i = 0; i < pendingEmails.length; i++) {
                 const email = pendingEmails[i];
-                await RabbitMQ.sendToQueue(email);
+
+                await RabbitMQ.sendToQueue(email._id);
                 await EmailService.markAsQueued(email._id);
             }
+
         } catch (error) {
             console.error("Error processing email queue:", error);
         }
     }
 
-    static async
+    static async listeningQueue() {
+        RabbitMQ.consumeFromQueue(async (emailId) => {
+            await SendMailService.sendMail(emailId);
+        });
+    }
+
 }
