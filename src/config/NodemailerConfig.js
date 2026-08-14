@@ -26,4 +26,24 @@ export class Nodemailer {
         }
     }
 
+    static async sendMail(emailInfo) {
+        try {
+
+            const info = await this.transporter.sendMail({
+                from: emailInfo.from,
+                to: emailInfo.to,
+                subject: emailInfo.subject,
+                text: emailInfo.text,
+            });
+
+            console.log("Message sent: %s", info.messageId);
+            return info;
+
+        } catch (error) {
+            console.error("Error while sending mail:", error);
+            throw error;
+        }
+
+    }
+
 }
