@@ -15,4 +15,15 @@ export class Nodemailer {
         },
     });
 
+    static async testConnection() {
+        try {
+            await this.transporter.verify();
+            console.log("Nodemailer is fine");
+            return true;
+        } catch (error) {
+            console.error("Verification nodemailer failed:", error);
+            return false;
+        }
+    }
+
 }
