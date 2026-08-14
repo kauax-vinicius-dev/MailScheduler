@@ -9,7 +9,7 @@ export class RabbitMQ {
     static async connect() {
         try {
             this.connection = await amqp.connect('amqp://localhost');
-            this.channel = await this.connection.createChannel();
+            this.channel = await this.connection.createConfirmChannel();
 
             await this.channel.assertQueue(this.queueName, {
                 durable: true,
@@ -22,18 +22,20 @@ export class RabbitMQ {
 
         } catch (error) {
             console.log("Failed to connect to RabbitMQ", error)
+            throw error;
         }
     }
 
-    static sendToQueue(message) {
+    static async sendToQueue(message) {
         if (!message) {
-            console.log("Message is empty");
-            return;
+            throw new Error("Message is empty");
         }
 
         this.channel.sendToQueue(this.queueName, Buffer.from(JSON.stringify(message)), {
             persistent: true
         });
+
+        await this.channel.waitForConfirms();
     }
 
     static consumeFromQueue(callback) {
