@@ -25,6 +25,7 @@ export class SendMailService {
 
             await Nodemailer.sendMail(emailInfo);
             await EmailService.deleteEmail(email.id)
+
         } catch (error) {
             console.error("Error sending email", error)
         }

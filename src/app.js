@@ -49,7 +49,7 @@ async function startApplication() {
         httpServer.listen(port, () => {
             console.log(`Server on. PORT:${port}`);
             console.log(`http://localhost:${port}`);
-        });
+        })
 
     } catch (error) {
         console.error("Failed to start application:", error);
